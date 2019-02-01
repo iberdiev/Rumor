@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<a href="{% url 'create_rumor' %}">Create Rumor</a><br><br>
+  {% for rumor in rumors %}
+  <h2>{{ rumor.title }}</h2>
+  <h4>{{ rumor.description }}</h4><br>
+  _________________________________________________________________________
+  {% endfor %}
+{% else %}
+You need to login in order to see the rumors
+{% endif %}
+{% endblock %}
