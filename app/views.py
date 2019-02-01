@@ -6,25 +6,39 @@ from django.contrib.auth.decorators import login_required
 from . forms import RumorCreateForm
 from . models import Rumor
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from . serializers import RumorSerializer
+from rest_framework import generics
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from . permissions import IsOwnerOrReadOnly
+
+@permission_classes((IsAuthenticated, ))
+class ApiRumors(APIView):
+    def get(self, request):
+        rumors = Rumor.objects.all()
+        data = RumorSerializer(rumors, many=True).data
+        return Response(data)
+
+@permission_classes((IsAuthenticated, IsOwnerOrReadOnly))
+class ApiRumorsDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Rumor.objects.all()
+    serializer_class = RumorSerializer
+
+@permission_classes((IsAuthenticated, ))
+class ApiRumorCreate(generics.ListCreateAPIView):
+    queryset = Rumor.objects.all()
+    serializer_class = RumorSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+
+
 def HomePage(request):
     rumors = Rumor.objects.all()
     return render(request, 'rumor/index.html', {'rumors': rumors})
-
-def ApiRumors(request):
-    rumors = Rumor.objects.all()
-    data = {"results": list(rumors.values("title","description","pub_date","author"))}
-    return JsonResponse(data)
-
-def ApiRumorsDetail(request, pk):
-    rumor = get_object_or_404(Rumor, pk=pk)
-    data = {"results": {
-                        "title": rumor.title,
-                        "description": rumor.description,
-                        "pub_date": rumor.pub_date,
-                        "author": rumor.author.username,
-                       }
-           }
-    return JsonResponse(data)
 
 def SignUp(request):
     if request.method == 'POST':
@@ -39,6 +53,8 @@ def SignUp(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
 
 @login_required
 def RumorCreateView(request):
