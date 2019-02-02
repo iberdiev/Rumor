@@ -4,11 +4,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from . forms import RumorCreateForm
-from . models import Rumor
-
+from . models import Rumor, Comment
+from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from . serializers import RumorSerializer
+from . serializers import RumorSerializer, CommentSerializer, UserSerializer
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -35,35 +35,22 @@ class ApiRumorCreate(generics.ListCreateAPIView):
         serializer.save(author=self.request.user)
 
 
+@permission_classes((IsAuthenticated, IsOwnerOrReadOnly))
+class ApiCommentsDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
-def HomePage(request):
-    rumors = Rumor.objects.all()
-    return render(request, 'rumor/index.html', {'rumors': rumors})
+@permission_classes((IsAuthenticated, ))
+class ApiComments(APIView):
+    def get(self, request, pk):
+        comments = Rumor.objects.get(pk=pk).comments
+        data = CommentSerializer(comments, many=True).data
+        return Response(data)
 
-def SignUp(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
+@permission_classes((IsAuthenticated, ))
+class ApiCommentCreate(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
-
-
-@login_required
-def RumorCreateView(request):
-    if request.method == 'POST':
-        form = RumorCreateForm(request.POST)
-        if form.is_valid():
-            form.save().author = request.user
-            form.save()
-            return redirect('home')
-    else:
-        form = RumorCreateForm()
-    return render(request, 'rumor/create_rumor.html', {'form': form})
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)

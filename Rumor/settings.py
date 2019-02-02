@@ -25,7 +25,7 @@ SECRET_KEY = '2emo(_^i=(otguz26u5ygww!^i&&v^z@z$foa=+f1y96@5co#v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.129.0.108']
 
 
 # Application definition
@@ -39,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'django.contrib.sites',
+    'allauth.socialaccount'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +136,14 @@ STATIC_URL = '/static/'
 # }
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+APPEND_SLASH=False
+SITE_ID = 1
+
+
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'iberdiev@zoho.com'
+EMAIL_HOST_PASSWORD = 'R1u2m3o4r5!'
+EMAIL_USE_TLS = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'

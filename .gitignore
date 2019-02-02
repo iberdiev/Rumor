@@ -3,3 +3,4 @@ myvenv
 app/__pycache__
 app/migrations/__pycache__
 Rumor/__pycache__/
+ideas
