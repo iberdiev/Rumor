@@ -16,6 +16,7 @@ from . permissions import IsOwnerOrReadOnly
 
 @permission_classes((IsAuthenticated, ))
 class ApiRumors(APIView):
+
     def get(self, request):
         rumors = Rumor.objects.all()
         data = RumorSerializer(rumors, many=True).data
