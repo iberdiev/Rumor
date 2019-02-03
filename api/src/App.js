@@ -2,49 +2,51 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 
-class App extends Component { // get token through login
-  state = {
-    username: '',
-    password: '',
-    email: '',
-  }
-  onSubmit = val => {
-    val.preventDefault();
-    axios.post('http://10.129.0.108:8000/api/v1/rest-auth/login/', {
-      username: this.state.username,
-      password: this.state.password,
-      email: this.state.email,
-    })
-    .then(function (response) {
-      console.log(response.data.key);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-  usernameChange = val => {
-    this.setState(
-      {username: val.target.value}
-    )
-  }
-  passwordChange = val =>{
-    this.setState(
-      {password: val.target.value}
-    )
-  }
-  render() {
-    return (
-      <div>
-          <form onSubmit={this.onSubmit}>
-            <input type='text' id='username' onChange={this.usernameChange}/>
-            <input type='password' id='password' onChange={this.passwordChange}/>
-            <button type='submit'>login</button>
-          </form>
-      </div>
-    )
-  }
-}
+// class App extends Component { // get token through login
+//   state = {
+//     username: '',
+//     password: '',
+//     email: '',
+//   }
+//   onSubmit = val => {
+//     val.preventDefault();
+//     axios.post('http://10.129.0.108:8000/api/v1/rest-auth/login/', {
+//       username: this.state.username,
+//       password: this.state.password,
+//       email: this.state.email,
+//     })
+//     .then(function (response) {
+//       console.log(response.data.key);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   }
+//   usernameChange = val => {
+//     this.setState(
+//       {username: val.target.value}
+//     )
+//   }
+//   passwordChange = val =>{
+//     this.setState(
+//       {password: val.target.value}
+//     )
+//   }
+//   render() {
+//     return (
+//       <div>
+//           <form onSubmit={this.onSubmit}>
+//             <input type='text' id='username' onChange={this.usernameChange}/>
+//             <input type='password' id='password' onChange={this.passwordChange}/>
+//             <button type='submit'>login</button>
+//           </form>
+//       </div>
+//     )
+//   }
+// }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // class App extends Component { //get all rumors
 //   constructor(props) {
 //     super(props);
@@ -162,7 +164,6 @@ class App extends Component { // get token through login
 //   }
 // }
 //
-// export default App;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -203,5 +204,203 @@ class App extends Component { // get token through login
 //     )}
 //   }
 // }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// class App extends Component { // creating rumor
+//   state = {
+//   title: '',
+//   description: '',
+//   }
+//   onSubmit = val => {
+//     val.preventDefault();
+//     axios.post('http://10.129.0.108:8000/api/v1/rumors/create/', {
+//       title: this.state.title,
+//       description: this.state.description,
+//     }, {headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': ' Token '+'0fdff3ccf15ded1ce35a087dbc708369519b0827'
+//     }})
+//     .then(function (response) {
+//       console.log(response);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   }
+//   render() {
+//     return(
+//       <div>
+//         <form onSubmit={this.onSubmit}>
+//           <h4>title</h4><input type='text' id='username' onChange={e => this.setState({title: e.target.value})} /><br/>
+//           <h4>description</h4><input type='text' id='username' onChange={e => this.setState({description: e.target.value})} /><br/>
+//           <button type='submit'>create</button>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// class App extends Component { // create comment
+//
+//   state = {
+//   rumor: 20,
+//   comment_text: '',
+//   }
+//   onSubmit = e => {
+//     e.preventDefault();
+//     axios.post('http://10.129.0.108:8000/api/v1/rumors/20/comments/create/', {
+//       rumor: this.state.rumor,
+//       comment_text: this.state.comment_text,
+//     }, {headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': ' Token '+'0fdff3ccf15ded1ce35a087dbc708369519b0827'
+//     }})
+//     .then(function (response) {
+//       console.log(response);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   }
+//   render() {
+//     return(
+//       <div>
+//         <form onSubmit={this.onSubmit}>
+//           <input type='text' id='comment' onChange={e => this.setState({comment_text: e.target.value})}/>
+//           <button type='submit'>comment</button>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// class App extends Component { // editing the rumor
+//   state = {
+//   id: 14,
+//   title: '',
+//   description: '',
+//   }
+//   onSubmit = val => {
+//     val.preventDefault();
+//     axios.put('http://10.129.0.108:8000/api/v1/rumors/20/', {
+//       title: this.state.title,
+//       description: this.state.description,
+//     }, {headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': ' Token '+'0fdff3ccf15ded1ce35a087dbc708369519b0827'
+//     }})
+//     .then(function (response) {
+//       console.log(response);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   }
+//   render() {
+//     return(
+//       <div>
+//         <form onSubmit={this.onSubmit}>
+//           <h4>title</h4><input type='text' id='username' onChange={e => this.setState({title: e.target.value})} /><br/>
+//           <h4>description</h4><input type='text' id='username' onChange={e => this.setState({description: e.target.value})} /><br/>
+//           <button type='submit'>create</button>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// class App extends Component { // deleting the rumor
+//   onSubmit = val => {
+//     val.preventDefault();
+//     axios.delete('http://10.129.0.108:8000/api/v1/rumors/26/', {headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': ' Token '+'0fdff3ccf15ded1ce35a087dbc708369519b0827'
+//     }})
+//     .then(function (response) {
+//       console.log(response);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   }
+//   render() {
+//     return(
+//       <div>
+//         <form onSubmit={this.onSubmit}>
+//           <button type='submit'>delete</button>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// class App extends Component { // editing the comment
+//   state = {
+//   comment_text: '',
+//   }
+//   onSubmit = val => {
+//     val.preventDefault();
+//     axios.put('http://10.129.0.108:8000/api/v1/comments/9/', {
+//       rumor: 20,
+//       comment_text: this.state.comment_text,
+//     }, {headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': ' Token '+'0fdff3ccf15ded1ce35a087dbc708369519b0827'
+//     }})
+//     .then(function (response) {
+//       console.log(response);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   }
+//   render() {
+//     return(
+//       <div>
+//         <form onSubmit={this.onSubmit}>
+//           <h4>comment_text</h4><input type='text' id='username' onChange={e => this.setState({comment_text: e.target.value})} /><br/>
+//           <button type='submit'>create</button>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// class App extends Component { // deleting the comment
+//   onSubmit = val => {
+//     val.preventDefault();
+//     axios.delete('http://10.129.0.108:8000/api/v1/comments/9/', {headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': ' Token '+'0fdff3ccf15ded1ce35a087dbc708369519b0827'
+//     }})
+//     .then(function (response) {
+//       console.log(response);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   }
+//   render() {
+//     return(
+//       <div>
+//         <form onSubmit={this.onSubmit}>
+//           <button type='submit'>delete</button>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+
 
 export default App;
