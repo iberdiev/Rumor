@@ -1,11 +1,17 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Rumor, Comment
+from rest_framework.authtoken.models import Token
 
 class RumorSerializer(serializers.ModelSerializer):
+
+    author_token = serializers.SerializerMethodField('get_token')
+    def get_token(self, rumor):
+      return Token.objects.get(user_id=rumor.author).key
+
     class Meta:
         model = Rumor
-        fields = ('id', 'title', 'description')
+        fields = ('id', 'title', 'description','author_token')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

@@ -25,7 +25,7 @@ SECRET_KEY = '2emo(_^i=(otguz26u5ygww!^i&&v^z@z$foa=+f1y96@5co#v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.129.0.108','192.168.0.7']
+ALLOWED_HOSTS = ['10.129.0.108','192.168.0.7','127.0.0.1']
 
 
 # Application definition

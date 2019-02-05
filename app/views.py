@@ -13,6 +13,8 @@ from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from . permissions import IsOwnerOrReadOnly
+from rest_framework.authtoken.models import Token
+
 
 @permission_classes((IsAuthenticated, ))
 class ApiRumors(APIView):
