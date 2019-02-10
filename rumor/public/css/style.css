@@ -1,0 +1,24 @@
+body{
+    font-family: 'Merriweather Sans', sans-serif;
+    background-color:#dfe4ea;
+}
+
+#logo{
+    font-family: 'Sonsie One', cursive;
+    font-size:30px;
+}
+.container-fluid{
+    padding:10px 25px;
+    background-color:#747d8c;
+}
+#registration{
+    margin-top:30px;
+}
+#registration ul{
+    margin-top:25px;
+    list-style-type: none;
+}
+#registration ul li{
+    font-size:20px;
+    margin-bottom:25px;
+}
