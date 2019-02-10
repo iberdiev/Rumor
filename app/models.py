@@ -9,7 +9,7 @@ class Rumor(models.Model):
     pub_date = models.DateTimeField('date_published', auto_now_add = True)
     ratings = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    
+
     def __str__(self):
         return '%s' % (self.title)
 
@@ -20,3 +20,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return '%s' % (self.comment_text)
+
+
+# class RumorVote(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     rumor_id = models.ForeignKey(Rumor, on_delete=models.CASCADE, related_name='votes')
