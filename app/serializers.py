@@ -14,9 +14,14 @@ class RumorSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'description','author_token')
 
 class CommentSerializer(serializers.ModelSerializer):
+
+    author_token = serializers.SerializerMethodField('get_token')
+    def get_token(self, comment):
+      return Token.objects.get(user_id=comment.author).key
+
     class Meta:
         model = Comment
-        fields = ('rumor', 'comment_text', 'id')
+        fields = ('rumor', 'comment_text', 'id', 'author_token')
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
