@@ -27,14 +27,21 @@ class CommentEdit extends React.Component{
             data = data.filter((value) =>{
                 return value.author_token === this.state.userToken && value.id.toString() === this.state.commentId;
             })[0];
-
+            if (data === undefined) {
+                this.props.history.push('/');
+            }
+            if (this.unmount) return;
             this.setState({
                 data: data,
                 isLoaded: true,
             })
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err.error);
         }) 
+    }
+
+    componentWillUnmount(){
+        this.unmount = true
     }
 
     componentDidMount(){
