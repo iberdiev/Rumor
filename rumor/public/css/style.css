@@ -1,24 +1,55 @@
 body{
-    font-family: 'Merriweather Sans', sans-serif;
-    background-color:#dfe4ea;
+    font-family: 'Nova Flat';
+    background-color:#FEFE4D;
 }
 
-#logo{
-    font-family: 'Sonsie One', cursive;
-    font-size:30px;
+div {
+  text-align: center;
+  display: center;
 }
-.container-fluid{
-    padding:10px 25px;
-    background-color:#747d8c;
+
+button {
+  background-color: #FEFE4D;
+  border: 2px solid black;
+  padding: 10px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 4px;
+  color: black;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+
 }
-#registration{
-    margin-top:30px;
+button:hover {
+  background-color: black;
+  color: white;
 }
-#registration ul{
-    margin-top:25px;
-    list-style-type: none;
+
+input{
+  width: 30%;
+  padding: 11px 10px;
+  margin: 5px 14px;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
 }
-#registration ul li{
-    font-size:20px;
-    margin-bottom:25px;
+input:focus{
+  background-color: #ECE47B;
+}
+
+textarea {
+  width: 30%;
+  height: 150px;
+  padding: 6px 10px;
+  margin: 5px 14px;
+  border: 2px solid black;
+  border-radius: 4px;
+  color: black;
+}
+
+textarea:focus{
+  background-color: #ECE47B;
 }

@@ -18,7 +18,7 @@ class Login extends React.Component{
                 window.location.reload();
             }).catch(err => {
                 this.error = true;
-                this.forceUpdate();  
+                this.forceUpdate();
             });
     }
 
@@ -27,16 +27,17 @@ class Login extends React.Component{
             return (
                 <h3>Wrong credentials, please check your username or password</h3>
             )
-        } 
+        }
     }
 
     render(){
         return(
             <div>
+                <h1>Log In</h1>
                 <form onSubmit={this.onSubmit}>
-                    <input type='text' onChange={e => this.setState({username: e.target.value})}/>
-                    <input type='password' onChange={e => this.setState({password: e.target.value})}/>
-                    <button type='submit'>login</button>
+                    <input type='text' onChange={e => this.setState({username: e.target.value})} placeholder="Username"/><br/>
+                    <input type='password' onChange={e => this.setState({password: e.target.value})} placeholder="Password"/><br/>
+                    <button type='submit'>Log In</button>
                     {this.wrongCredentials()}
                 </form>
             </div>

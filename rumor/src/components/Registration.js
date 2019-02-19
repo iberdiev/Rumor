@@ -37,15 +37,12 @@ class Registration extends React.Component{
         return(
             <div>
             <form onSubmit={this.onSubmit}>
-                <h3>username</h3>
-                <input type='text' onChange={e => this.setState({username: e.target.value})} /><br />
-                <h3>email</h3>
-                <input type='text' onChange={e => this.setState({email: e.target.value})} /><br />
-                <h3>password1</h3>
-                <input type='text' onChange={e => this.setState({password1: e.target.value})} /><br />
-                <h3>password2</h3>
-                <input type='text' onChange={e => this.setState({password2: e.target.value})} /><br />
-                <button type='submit'>Signup</button>
+                <h1> Sign Up </h1>
+                  <input type='text' onChange={e => this.setState({username: e.target.value})}placeholder="Username"/><br/>
+                <input type='text' onChange={e => this.setState({email: e.target.value})}placeholder="Email" /><br/>
+                <input type='text' onChange={e => this.setState({password1: e.target.value})}placeholder="Password"/><br/>
+                <input type='text' onChange={e => this.setState({password2: e.target.value})}placeholder="Confirm password"/><br/>
+                <button type='submit'>Sign Up</button>
                 {this.wrongCredentials()}
             </form>
          </div>

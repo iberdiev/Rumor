@@ -25,3 +25,5 @@ class Comment(models.Model):
 # class RumorVote(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)
 #     rumor_id = models.ForeignKey(Rumor, on_delete=models.CASCADE, related_name='votes')
+#     def __str__(self):
+#         return '%s %s' % (self.rumor_id, self,user)
