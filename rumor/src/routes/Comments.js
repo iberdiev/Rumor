@@ -11,7 +11,7 @@ class Comments extends React.Component{
         }
         this.state = {
             isLoaded: false,
-            rumorId: this.props.match.params.number, 
+            rumorId: this.props.match.params.number,
             apiURL: 'http://127.0.0.1:8000/api/v1/rumors/' + this.props.match.params.number + '/',
             userToken: localStorage.getItem('token'),
         };
@@ -21,7 +21,7 @@ class Comments extends React.Component{
         axios.all([
             axios.get(this.state.apiURL, {
                 headers:{
-                    Authorization:'Token ' +  this.state.userToken,        
+                    Authorization:'Token ' +  this.state.userToken,
                 }
             }),
             axios.get(this.state.apiURL + 'comments/', {
@@ -58,7 +58,7 @@ class Comments extends React.Component{
             this.forceUpdate();
         }).catch(err =>{
             console.log(err.error);
-        })  
+        })
     }
 
     deleteComment = (event) =>{
@@ -76,7 +76,7 @@ class Comments extends React.Component{
             console.log(err);
         })
     }
-    
+
     render(){
         const { isLoaded } = this.state
         if (!isLoaded) {
@@ -96,7 +96,7 @@ class Comments extends React.Component{
                     <div>
                         <form onSubmit={this.handleSubmit}>
                             <h3>Comment:</h3>
-                            <input type="text" onChange={e => this.setState({ newComment: e.target.value })} />
+                            <input maxlength="300" type="text" onChange={e => this.setState({ newComment: e.target.value })} />
                             <button type="submit">Submit</button>
                         </form>
                         <hr/>

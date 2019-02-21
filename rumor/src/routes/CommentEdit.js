@@ -6,7 +6,7 @@ class CommentEdit extends React.Component{
 
     constructor(props){
         super(props);
-        
+
         this.state = {
             isLoaded: false,
             rumorId: this.props.match.params.number,
@@ -23,7 +23,7 @@ class CommentEdit extends React.Component{
             }
         }).then(res => {
             let { data } = res;
-            
+
             data = data.filter((value) =>{
                 return value.author_token === this.state.userToken && value.id.toString() === this.state.commentId;
             })[0];
@@ -37,7 +37,7 @@ class CommentEdit extends React.Component{
             })
         }).catch(err => {
             console.log(err.error);
-        }) 
+        })
     }
 
     componentWillUnmount(){
@@ -67,7 +67,7 @@ class CommentEdit extends React.Component{
     }
 
     render(){
-        
+
         const { isLoaded } = this.state
 
         if (!isLoaded){
@@ -77,11 +77,11 @@ class CommentEdit extends React.Component{
                 </div>
             )
         } else {
-           
+
             return (
                 <div>
                     <h2>Anonym</h2>
-                    <input type="text" defaultValue={this.state.data.comment_text} onChange={e => this.setState({data:{ comment_text: e.target.value }})} /><br/>
+                    <input type="text" maxlength="300" defaultValue={this.state.data.comment_text} onChange={e => this.setState({data:{ comment_text: e.target.value }})} /><br/>
                     <button onClick={this.handleChange}>Submit</button>
                 </div>
             )

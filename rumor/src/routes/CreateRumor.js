@@ -35,10 +35,10 @@ class CreateRumor extends React.Component{
                 <form onSubmit={this.handleSubmit}>
                     <h2>Title of the rumor</h2>
                     <br/>
-                    <input type="text" onChange = {e => this.setState({ title: e.target.value})} />
+                    <input maxlength="300" type="text" onChange = {e => this.setState({ title: e.target.value})} />
                     <br/>
                     <h2>Description of the rumor</h2>
-                    <textarea onChange = {e => this.setState({ description: e.target.value})}/>
+                    <textarea maxlength="2500" onChange = {e => this.setState({ description: e.target.value})}/>
                     <br/>
                     <button type="submit">Submit</button>
                 </form>

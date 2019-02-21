@@ -83,10 +83,10 @@ class EditRumor extends React.Component{
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <h2>Title</h2>
-                        <input type="text" value={title} onChange={e => this.setState({title: e.target.value})}/>
+                        <input type="text" maxlength="300" value={title} onChange={e => this.setState({title: e.target.value})}/>
                         <br/>
                         <h2>Description</h2>
-                        <textarea onChange={e => this.setState({description: e.target.value})} defaultValue={description}/>
+                        <textarea maxlength="2500" onChange={e => this.setState({description: e.target.value})} defaultValue={description}/>
                         <br/>
                         <button type="submit">Submit</button>
                         <button onClick={this.handleDelete}>Delete</button>

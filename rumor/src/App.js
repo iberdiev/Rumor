@@ -8,6 +8,7 @@ import CreateRumor from './routes/CreateRumor';
 import Logout from './routes/Logout';
 import Comments from './routes/Comments';
 import CommentEdit from './routes/CommentEdit';
+import About from './routes/About';
 
 class App extends React.Component{
 
@@ -16,6 +17,7 @@ class App extends React.Component{
             <BrowserRouter>
                 <Switch>
                     <Route path='/' component={Main} exact />
+                    <Route path='/about' exact component={About}/>
                     <Route path='/rumors/:number' exact component={EditRumor}/>
                     <Route path='/rumor/create' exact component={CreateRumor} />
                     <Route path='/logout' exact component={Logout} />
