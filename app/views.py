@@ -18,7 +18,7 @@ from . permissions import IsOwnerOrReadOnly
 class ApiRumors(APIView):
 
     def get(self, request):
-        rumors = Rumor.objects.all()
+        rumors = Rumor.objects.all().order_by('id')
         data = RumorSerializer(rumors, many=True).data
         return Response(data)
 
@@ -44,7 +44,7 @@ class ApiCommentsDetail(generics.RetrieveUpdateDestroyAPIView):
 @permission_classes((IsAuthenticated, ))
 class ApiComments(APIView):
     def get(self, request, pk):
-        comments = Rumor.objects.get(pk=pk).comments
+        comments = Rumor.objects.get(pk=pk).comments.order_by('id')
         data = CommentSerializer(comments, many=True).data
         return Response(data)
 
