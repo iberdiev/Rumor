@@ -20,9 +20,9 @@ class Rumor extends React.Component{
         axios.get('http://127.0.0.1:8000/api/v1/rumors/',{
             headers:{
                 Authorization:'Token ' + this.token,
-            }        
+            }
         }).then(res => {
-            
+
             const data = res.data.reverse();
 
             this.setState({
@@ -53,7 +53,7 @@ class Rumor extends React.Component{
                         <Link to='/logout/'>Log out</Link>
                     </span>
                     {data.map(rumor => (
-                        <OneRumor key={rumor.id} rumorId={rumor.id} title={rumor.title} description={rumor.description} authorToken={rumor.author_token}/> 
+                        <OneRumor key={rumor.id} rumorId={rumor.id} title={rumor.title} description={rumor.description} pub_date={rumor.pub_date} authorToken={rumor.author_token}/>
                     ))
                     }
                 </div>
