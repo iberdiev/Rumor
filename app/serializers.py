@@ -11,7 +11,7 @@ class RumorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rumor
-        fields = ('id', 'title', 'description','author_token')
+        fields = ('id', 'title', 'description','author_token','pub_date')
 
 class CommentSerializer(serializers.ModelSerializer):
 
