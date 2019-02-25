@@ -32,7 +32,7 @@ class Comments extends React.Component{
                 this.setState({
                     isLoaded: true,
                     rumor: rumor.data,
-                    comments: comments.data,
+                    comments: comments.data.reverse(),
                 });
         })).catch( err => {
                 console.log(err.error);
