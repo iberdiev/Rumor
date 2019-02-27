@@ -11,6 +11,8 @@ class EditRumor extends React.Component{
             id: this.props.match.params.number,
             url: 'http://127.0.0.1:8000/api/v1/rumors/' + this.props.match.params.number + '/',
             userToken: localStorage.getItem('token'),
+            isSubmitButtonDisabled: false,
+            isDeleteButtonDisabled: false,
         };
     }
 
@@ -36,6 +38,8 @@ class EditRumor extends React.Component{
     handleSubmit = (event) => {
         event.preventDefault();
 
+        this.setState({isSubmitButtonDisabled: true,});
+
         axios.put(this.state.url, {
             id: this.state.id,
             title: this.state.title,
@@ -54,6 +58,8 @@ class EditRumor extends React.Component{
 
     handleDelete = (event) =>{
         event.preventDefault();
+
+        this.setState({isDeleteButtonDisabled: true})
 
         axios.delete(this.state.url, {
             headers:{
@@ -88,8 +94,8 @@ class EditRumor extends React.Component{
                         <h2>Description</h2>
                         <textarea maxlength="2500" onChange={e => this.setState({description: e.target.value})} defaultValue={description}/>
                         <br/>
-                        <button type="submit">Submit</button>
-                        <button onClick={this.handleDelete}>Delete</button>
+                        <button disabled={this.state.isSubmitButtonDisabled} type="submit">{this.state.isSubmitButtonDisabled ? 'Submiting...' : 'Submit changes'}</button>
+                        <button disabled={this.state.isDeleteButtonDisabled} onClick={this.handleDelete}>{this.state.isDeleteButtonDisabled ? 'Deleting...' : 'Delete' }</button>
                     </form>
                 </div>
             )

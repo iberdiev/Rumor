@@ -14,6 +14,8 @@ class Comments extends React.Component{
             rumorId: this.props.match.params.number,
             apiURL: 'http://127.0.0.1:8000/api/v1/rumors/' + this.props.match.params.number + '/',
             userToken: localStorage.getItem('token'),
+            isCommentButtonDisabled: false,
+            isDeleteButtonDisabled: false,
         };
     }
 
@@ -45,25 +47,33 @@ class Comments extends React.Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-
-        axios.post(this.state.apiURL + 'comments/create/', {
-            rumor: this.state.rumorId,
-            comment_text: this.state.newComment,
-        }, {
-            headers:{
-                Authorization: 'Token ' + this.state.userToken,
-            }
-        }).then(res => {
-            this.getData();
-            this.forceUpdate();
-        }).catch(err =>{
-            console.log(err.error);
-        })
+        
+        const { newComment } = this.state;
+        
+        if (newComment !== undefined || newComment !== ''){
+            this.setState({ isCommentButtonDisabled: true, })
+            
+            axios.post(this.state.apiURL + 'comments/create/', {
+                rumor: this.state.rumorId,
+                comment_text: newComment,
+            }, {
+                headers:{
+                    Authorization: 'Token ' + this.state.userToken,
+                }
+            }).then(res => {
+                this.getData();
+                this.setState({isCommentButtonDisabled: false,})
+                this.forceUpdate();
+            }).catch(err =>{
+                console.log(err.error);
+            })
+        }  
     }
 
     deleteComment = (event) =>{
-
         event.preventDefault();
+
+        this.setState({ isDeleteButtonDisabled: true, })
 
         axios.delete('http://127.0.0.1:8000/api/v1/comments/'+ event.target.id +'/', {
             headers: {
@@ -71,6 +81,7 @@ class Comments extends React.Component{
             }
         }).then( () => {
             this.getData();
+            this.setState({isDeleteButtonDisabled: false,})
             this.forceUpdate();
         }).catch(err => {
             console.log(err);
@@ -97,7 +108,7 @@ class Comments extends React.Component{
                         <form onSubmit={this.handleSubmit}>
                             <h3>Comment:</h3>
                             <input maxlength="300" type="text" onChange={e => this.setState({ newComment: e.target.value })} />
-                            <button type="submit">Submit</button>
+                            <button disabled={this.state.isCommentButtonDisabled} type="submit">{this.state.isCommentButtonDisabled ? 'Commenting...' : 'Comment'}</button>
                         </form>
                         <hr/>
                     </div>
@@ -108,7 +119,7 @@ class Comments extends React.Component{
                                 <h3>{comment.comment_text}</h3>
                                 { this.state.userToken === comment.author_token ? (
                                 <div>
-                                    <button id={comment.id} onClick={this.deleteComment} >Delete</button>
+                                    <button disabled={this.state.isDeleteButtonDisabled} id={comment.id} onClick={this.deleteComment} >{ this.state.isDeleteButtonDisabled ? 'Deleting...' : 'Delete' }</button>
                                     <Link to={'/rumor/' + this.state.rumorId + '/comments/edit/' + comment.id}><button>Edit</button></Link>
                                 </div>
                                 ) : null}

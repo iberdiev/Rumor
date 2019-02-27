@@ -6,29 +6,48 @@ class CreateRumor extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            isButtonDisabled: false,
+            empty: false,
+        }
     }
 
     handleSubmit = (event) =>{
         event.preventDefault();
+            
+        const {title, description} = this.state;
+        const author_token = localStorage.getItem('token');
+            
+        if ((title === undefined || title==='') && (description === undefined || description === '')) {
 
-        axios.post('http://127.0.0.1:8000/api/v1/rumors/create/', {
-            title: this.state.title,
-            description: this.state.description,
-            author_token: localStorage.getItem('token'),
-        }, {
-            headers:{
-                Authorization: 'Token ' + localStorage.getItem('token'),
-            }
-        }).then(res =>{
-            console.log(res);
-            this.props.history.push('/');
-        }).catch(err => {
-            console.log(err)
-        });
+            this.setState({empty: true, descriptionOfError: 'If you want to create a rumor please add the title and the description'})
+        
+        } else if (title === undefined || title === '') {
 
+            this.setState({empty: true, descriptionOfError: 'Please add the title to your rumor'});
+        
+        } else if (description === undefined || description === ''){
+
+            this.setState({empty: true, descriptionOfError: 'Please add a discription to your rumor'});
+        
+        } else {
+            this.setState({ isButtonDisabled: true })
+
+            axios.post('http://127.0.0.1:8000/api/v1/rumors/create/', {
+                title: title,
+                description: description,
+                author_token: author_token,
+            }, {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('token'),
+                }
+            }).then(res =>{
+                this.props.history.push('/');
+            }).catch(err => {
+                console.log(err)
+            });
+        }
     }
-
     render() {
         return (
             <div>
@@ -40,7 +59,8 @@ class CreateRumor extends React.Component{
                     <h2>Description of the rumor</h2>
                     <textarea maxlength="2500" onChange = {e => this.setState({ description: e.target.value})}/>
                     <br/>
-                    <button type="submit">Submit</button>
+                    <button disabled={this.state.isButtonDisabled} type="submit">{this.state.isButtonDisabled ? 'Submiting...' : 'Submit'}</button>
+                    {this.state.empty ? this.state.descriptionOfError : ''}
                 </form>
             </div>
         )

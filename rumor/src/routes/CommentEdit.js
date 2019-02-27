@@ -12,6 +12,7 @@ class CommentEdit extends React.Component{
             rumorId: this.props.match.params.number,
             commentId: this.props.match.params.commentNumber,
             userToken: localStorage.getItem('token'),
+            isSubmitButtonDisabled: false,
         }
 
     }
@@ -51,6 +52,8 @@ class CommentEdit extends React.Component{
 
     handleChange = () =>{
 
+        this.setState({isSubmitButtonDisabled: true});
+
         axios.put('http://127.0.0.1:8000/api/v1/comments/' + this.state.commentId + '/', {
             rumor: this.state.rumorId,
             comment_text: this.state.data.comment_text,
@@ -82,7 +85,7 @@ class CommentEdit extends React.Component{
                 <div>
                     <h2>Anonym</h2>
                     <input type="text" maxlength="300" defaultValue={this.state.data.comment_text} onChange={e => this.setState({data:{ comment_text: e.target.value }})} /><br/>
-                    <button onClick={this.handleChange}>Submit</button>
+                    <button disabled={this.state.isSubmitButtonDisabled} onClick={this.handleChange}>{this.state.isSubmitButtonDisabled ? 'Submiting...' : 'Submit changes'}</button>
                 </div>
             )
         }

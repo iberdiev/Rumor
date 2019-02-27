@@ -5,12 +5,16 @@ class Login extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+            isLoginDisabled: false,
+        };
         this.error = false;
+
     }
 
     onSubmit = event =>{
         event.preventDefault();
+        this.setState({ isLoginDisabled: true, })
 
         axios.post('http://127.0.0.1:8000/api/v1/rest-auth/login/', this.state)
             .then(res => {
@@ -18,7 +22,8 @@ class Login extends React.Component{
                 window.location.reload();
             }).catch(err => {
                 this.error = true;
-                this.forceUpdate();
+                this.setState({isLoginDisabled: false,});
+                this.forceUpdate();  
             });
     }
 
@@ -35,9 +40,9 @@ class Login extends React.Component{
             <div>
                 <h1>Log In</h1>
                 <form onSubmit={this.onSubmit}>
-                    <input type='text' onChange={e => this.setState({username: e.target.value})} placeholder="Username"/><br/>
-                    <input type='password' onChange={e => this.setState({password: e.target.value})} placeholder="Password"/><br/>
-                    <button type='submit'>Log In</button>
+                    <input type='text' onChange={e => this.setState({username: e.target.value})}/>
+                    <input type='password' onChange={e => this.setState({password: e.target.value})}/>
+                    <button disabled={this.state.isLoginDisabled} type='submit'>{this.state.isLoginDisabled ? 'Loging...' : 'Log in'}</button>
                     {this.wrongCredentials()}
                 </form>
             </div>
