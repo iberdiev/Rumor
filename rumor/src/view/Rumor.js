@@ -48,18 +48,20 @@ class Rumor extends React.Component{
             return(
                 <div>
                     <span>
-                        <Link to='/rumor/create'>New Rumor</Link>
-                        <br/>
-                        <Link to='/logout/'>Log out</Link>
+                      <ul>
+                        <li id='newPost'><Link to='/rumor/create'>New Post</Link></li> 
+                        <li><Link to='/logout/'>Log out</Link></li>
+                      </ul>
                     </span>
+                    <ol>
                     {data.map(rumor => (
                         <OneRumor key={rumor.id} rumorId={rumor.id} title={rumor.title} description={rumor.description} pub_date={rumor.pub_date} authorToken={rumor.author_token}/>
                     ))
                     }
+                    </ol>
                 </div>
             )
         }
     }
 }
-
 export default Rumor;

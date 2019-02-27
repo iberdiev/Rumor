@@ -94,8 +94,8 @@ class EditRumor extends React.Component{
                         <h2>Description</h2>
                         <textarea maxlength="2500" onChange={e => this.setState({description: e.target.value})} defaultValue={description}/>
                         <br/>
-                        <button disabled={this.state.isSubmitButtonDisabled} type="submit">{this.state.isSubmitButtonDisabled ? 'Submiting...' : 'Submit changes'}</button>
-                        <button disabled={this.state.isDeleteButtonDisabled} onClick={this.handleDelete}>{this.state.isDeleteButtonDisabled ? 'Deleting...' : 'Delete' }</button>
+                        <button id='edit' disabled={this.state.isSubmitButtonDisabled} type="submit">{this.state.isSubmitButtonDisabled ? 'Submiting...' : 'Submit changes'}</button>
+                        <button id='edit' disabled={this.state.isDeleteButtonDisabled} onClick={this.handleDelete}>{this.state.isDeleteButtonDisabled ? 'Deleting...' : 'Delete' }</button>
                     </form>
                 </div>
             )

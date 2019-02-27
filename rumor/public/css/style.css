@@ -1,15 +1,25 @@
 body{
     font-family: 'Nova Flat';
-    background-color:#FEFE4D;
+    background-image: linear-gradient(#A1DECB, #F6FE84);
+    text-align: center;
 }
 
 div {
   text-align: center;
   display: center;
 }
-
-button {
-  background-color: #FEFE4D;
+#edit {
+  background:  transparent;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  color: black;
+}
+#edit:hover {
+  background-color: black;
+  color: white;
+}
+button:not(#except), a:not(#except){
+  background:  transparent;
   border: 2px solid black;
   padding: 10px 22px;
   text-align: center;
@@ -20,9 +30,9 @@ button {
   color: black;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
-
+  margin:5px 11px;
 }
-button:hover {
+button, a:not(#except):hover {
   background-color: black;
   color: white;
 }
@@ -33,11 +43,11 @@ input{
   margin: 5px 14px;
   border: 2px solid black;
   border-radius: 4px;
-  background-color: white;
+  background:  transparent;
   color: black;
 }
 input:focus{
-  background-color: #ECE47B;
+  background:  transparent;
 }
 
 textarea {
@@ -48,16 +58,29 @@ textarea {
   border: 2px solid black;
   border-radius: 4px;
   color: black;
+  background:  transparent;
+
 }
 
 textarea:focus{
-  background-color: #ECE47B;
+  background:  transparent;
+
 }
 li {
   display: inline;
+}
+#newPost {
+  width: 30px;
+  margin:5px 0px;
 }
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
+
+#list1 { width: 70%; border:1px solid black;border-width: 3px;text-align: center;display: inline-block;border-radius: 10px;padding: 0px 10px;margin: 4px;}
+#list1 ol { font-style:italic; font-family:Georgia, Times, serif; font-size:24px; color:#bfe1f1;  }
+#list1 ol li { }
+#list1 ol li p { padding:8px; font-style:normal; font-family:Arial; font-size:13px; color:#eee; border-left: 1px solid #999; }
+#list1 ol li p em { display:block; }

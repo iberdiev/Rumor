@@ -14,22 +14,22 @@ class CreateRumor extends React.Component{
 
     handleSubmit = (event) =>{
         event.preventDefault();
-            
+
         const {title, description} = this.state;
         const author_token = localStorage.getItem('token');
-            
+
         if ((title === undefined || title==='') && (description === undefined || description === '')) {
 
             this.setState({empty: true, descriptionOfError: 'If you want to create a rumor please add the title and the description'})
-        
+
         } else if (title === undefined || title === '') {
 
             this.setState({empty: true, descriptionOfError: 'Please add the title to your rumor'});
-        
+
         } else if (description === undefined || description === ''){
 
             this.setState({empty: true, descriptionOfError: 'Please add a discription to your rumor'});
-        
+
         } else {
             this.setState({ isButtonDisabled: true })
 
@@ -59,7 +59,7 @@ class CreateRumor extends React.Component{
                     <h2>Description of the rumor</h2>
                     <textarea maxlength="2500" onChange = {e => this.setState({ description: e.target.value})}/>
                     <br/>
-                    <button disabled={this.state.isButtonDisabled} type="submit">{this.state.isButtonDisabled ? 'Submiting...' : 'Submit'}</button>
+                    <button id='edit' disabled={this.state.isButtonDisabled} type="submit">{this.state.isButtonDisabled ? 'Submiting...' : 'Submit'}</button>
                     {this.state.empty ? this.state.descriptionOfError : ''}
                 </form>
             </div>
