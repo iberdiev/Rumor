@@ -47,12 +47,12 @@ class Comments extends React.Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        
+
         const { newComment } = this.state;
-        
+
         if (newComment !== undefined || newComment !== ''){
             this.setState({ isCommentButtonDisabled: true, })
-            
+
             axios.post(this.state.apiURL + 'comments/create/', {
                 rumor: this.state.rumorId,
                 comment_text: newComment,
@@ -67,7 +67,7 @@ class Comments extends React.Component{
             }).catch(err =>{
                 console.log(err.error);
             })
-        }  
+        }
     }
 
     deleteComment = (event) =>{
@@ -108,19 +108,19 @@ class Comments extends React.Component{
                         <form onSubmit={this.handleSubmit}>
                             <h3>Comment:</h3>
                             <input maxlength="300" type="text" onChange={e => this.setState({ newComment: e.target.value })} />
-                            <button disabled={this.state.isCommentButtonDisabled} type="submit">{this.state.isCommentButtonDisabled ? 'Commenting...' : 'Comment'}</button>
+                            <button id='edit' disabled={this.state.isCommentButtonDisabled} type="submit">{this.state.isCommentButtonDisabled ? 'Commenting...' : 'Comment'}</button>
                         </form>
                         <hr/>
                     </div>
                     <div>
                         {comments.map( (comment, index) =>(
                             <div key={index}>
-                                <h2>Anonym</h2>
+                                <h2>&#9774;&#9774;&#9774;</h2>
                                 <h3>{comment.comment_text}</h3>
                                 { this.state.userToken === comment.author_token ? (
                                 <div>
                                     <button disabled={this.state.isDeleteButtonDisabled} id={comment.id} onClick={this.deleteComment} >{ this.state.isDeleteButtonDisabled ? 'Deleting...' : 'Delete' }</button>
-                                    <Link to={'/rumor/' + this.state.rumorId + '/comments/edit/' + comment.id}><button>Edit</button></Link>
+                                    <Link id='except' to={'/rumor/' + this.state.rumorId + '/comments/edit/' + comment.id}><button>Edit</button></Link>
                                 </div>
                                 ) : null}
                             </div>
