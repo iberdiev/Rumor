@@ -40,8 +40,8 @@ class Login extends React.Component{
             <div>
                 <h1>Log In</h1>
                 <form onSubmit={this.onSubmit}>
-                    <input type='text' onChange={e => this.setState({username: e.target.value})} placeholder="Username"/>
-                    <input type='password' onChange={e => this.setState({password: e.target.value})} placeholder="Password"/>
+                    <input type='text' onChange={e => this.setState({username: e.target.value})} placeholder="Username"/><br/>
+                    <input type='password' onChange={e => this.setState({password: e.target.value})} placeholder="Password"/><br/>
                     <button disabled={this.state.isLoginDisabled} type='submit'>{this.state.isLoginDisabled ? 'Loging...' : 'Log in'}</button>
                     {this.wrongCredentials()}
                 </form>

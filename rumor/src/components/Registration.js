@@ -48,7 +48,7 @@ class Registration extends React.Component{
             <div>
             <form onSubmit={this.onSubmit}>
                 <h1> Sign Up </h1>
-                <input type='text' onChange={e => this.setState({username: e.target.value})} placeholder="Username"/> /><br />
+                <input type='text' onChange={e => this.setState({username: e.target.value})} placeholder="Username"/><br />
                 <input type='text' onChange={e => this.setState({email: e.target.value})} placeholder="Email"/><br />
                 <input type='password' onChange={e => this.setState({password1: e.target.value})} placeholder="Password"/><br />
                 <input type='password' onChange={e => this.setState({password2: e.target.value})} placeholder="Confirm password"/><br />
